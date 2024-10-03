@@ -5,3 +5,4 @@ from .cart import Cart
 def cart(request):
     # return defult data from cart
     return {"cart": Cart(request)}
+ 
