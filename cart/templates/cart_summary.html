@@ -70,6 +70,11 @@
     </div>
     <br /><br />
     {% endfor%}
+    <h3>total : ${{totals}}</h3>
+    <br />
+    <br />
+    <br />
+    <br />
     {% else %}
     there's nothing in your cart
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -80,14 +85,14 @@
     //update cart
     $(document).on('click', '.update-cart', function (e) {
         e.preventDefault();
-        var productid = $(this).data('index');
+        var productId = $(this).data('index');
         $.ajax({
 
             type: 'POST',
             url: '{% url "cart_update" %}',
             data: {
-                product_id: $(this).data('index'),
-                product_quantity: $("#select" + productid + " option:selected").text(),
+                product_id: productId,
+                product_quantity: $("#select" + productId + " option:selected").text(),
                 csrfmiddlewaretoken: '{{ csrf_token }}',
                 action: 'post',
             },
@@ -100,10 +105,11 @@
 
         });
     })
-        //delete cart
-        $(document).on('click', '.delete-product', function (e) {
+    //delete cart
+    $(document).on('click', '.delete-product', function (e) {
         e.preventDefault();
-        
+        var productId = $(this).data('index');
+
         $.ajax({
 
             type: 'POST',
@@ -115,6 +121,7 @@
             },
             success: function (json) {
                 location.reload();
+                console.log(productId, " has been deleted")
             },
             error: function (xhr, errmsg, err) {
                 console.log(xhr.status + ": " + xhr.responseText); // proposed change
