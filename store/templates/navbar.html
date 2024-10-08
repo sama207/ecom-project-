@@ -24,8 +24,9 @@
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Books' %}">Books</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Marketing-Books' %}">Marketing books</a></li>
+                        {% for category in categories %}
+                        <li> <a class="dropdown-item" href="{% url 'category' category %}"> {{category.name}} </a></li>
+                        {% endfor %}
                     </ul>
                 </li>
             </ul>
