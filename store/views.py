@@ -22,14 +22,16 @@ def product(request, pk):
     product = Product.objects.get(id=pk)
     return render(request, "product.html", {"product": product})
 
-def category_summary(request):
-        categories=Category.objects.all()
 
-        return render(
+def category_summary(request):
+    categories = Category.objects.all()
+
+    return render(
         request,
         "category_summary.html",
-        {"categories":categories},
-        )
+        {"categories": categories},
+    )
+
 
 def category(request, foo):
     # replace hyphens with spaces
@@ -42,10 +44,8 @@ def category(request, foo):
             request, "category.html", {"products": products, "category": category}
         )
     except:
-        messages.success(
-                request, ("that category doesnt exists")
-            )
-        return redirect('home')
+        messages.success(request, ("that category doesnt exists"))
+        return redirect("home")
 
 
 def login_user(request):
